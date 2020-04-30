@@ -1,12 +1,45 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Test Page</title>
+        <title>City of Boston: 311 Viz</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+
+        <script type="text/javascript" src="itemList.js"></script>
+        <script type="text/javascript" src="barChart.js"></script>
+        <script type="text/javascript" src="bosMap.js"></script>
+        <link rel= "stylesheet" type= "text/css" href = "bos311styling.css">
+
     </head>
 
     <body>
-        <h1>Hello World</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg">
+                <h1>Boston 311 Dashboard</h1> 
+                <span id="explainer_text">All data sourced from the City of Boston's open data hub, <a href="https://data.boston.gov">Analyze Boston</a>. </span>
+                </div>
+            </div>
+        </div>
+
+        <div id = "bar_chart" class="container">
+            <h2>Request Volume</h2> 
+        </div>
+
+        <div id = "boston_map" class="container">
+            <h2>Map Placeholder</h2> 
+        </div>
+
+        <div id = "recent_records_table" class="container">
+            <h2>Recent Calls Table</h2> 
+        </div>
+        
     </body>
 
-</html>
+
+    

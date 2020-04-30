@@ -1,0 +1,24 @@
+#xaxis {
+    font: 14px helvetica; 
+}
+
+#explainer_text {
+    font: 12px helvetica; 
+}
+
+#table_text {
+    font: 12px helvetica; 
+}
+
+.tooltip {	
+    position: absolute;			
+    text-align: left;			
+    width: 350px;									
+    padding: 2px;				
+    font: 14px helvetica;		
+    background: darkblue;
+    color: white;	
+    border: 2px;		
+    border-radius: 8px;			
+    pointer-events: none;			
+  }
