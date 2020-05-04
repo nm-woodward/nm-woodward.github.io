@@ -10,10 +10,19 @@ var group_query = `SELECT CAST(open_dt as date) as open_dt, type, count(*) as cn
 
 console.log(url_base+group_query);
 
+//Create a master list of request types and aggregated counts for each type (accessed globally)  
+var request_types = [];
 
-$.getJSON(url_base + group_query, function(data) {
-    df = data.result.records;    
-    var text = 'Success';
+var df = [];
+    $.ajax({
+        url: url_base + group_query,
+        async: false,
+        dataType: 'json',
+        success: function(data) {
+            df = data.result.records;
+        }
+    });
+
 
     console.log(df);
     var content = `<span> test </span>`;
@@ -35,21 +44,29 @@ $.getJSON(url_base + group_query, function(data) {
 
     console.log(nested);
 
-
-    //Create a master list of request types and aggregated counts for each type          
-    var request_types = [];
-
     //Create a total count of all 2020 311 requests made (first row of the dropdown):
     var overall_obj = {};
     overall_obj["text"] = 'All Requests';
     overall_obj["cnt"] = 0;
+    overall_obj["cnt_trend"] = 0;
     request_types.push(overall_obj);
+
+    //Get current date (for use in trend counting later on)
+    var today = new Date();
+    var trend_lookback = 30;
 
     //Loop through each day in the nested object:
               for(i=0; i<nested.length; i++)
             {
-              //Add the day's count to the 2020 toal
-              overall_obj["cnt"] += parseInt(nested[i].total);            
+              //Add the day's count to the 2020 total
+              overall_obj["cnt"] += parseInt(nested[i].total);   
+              
+              //Add the day's count to the 30-day total if within the window:
+              day = new Date(nested[i].key);
+              if ((today.getTime() - day.getTime()) / (1000 * 3600 * 24) <= trend_lookback)
+              {
+                overall_obj["cnt_trend"] += parseInt(nested[i].total);  
+              }
     
               //Loop through each request type within that day: 
                 for(j=0; j<nested[i].values.length; j++)
@@ -69,12 +86,26 @@ $.getJSON(url_base + group_query, function(data) {
                     //If that request type is accounted for, add the count for the day to the master count
                     if (found >= 0) {
                         request_types[found].cnt += parseInt(cnt_add);
+
+                        //If within trend window, add the day's count to the trend count as well
+                        if ((today.getTime() - day.getTime()) / (1000 * 3600 * 24) <= trend_lookback)
+                        {
+                          request_types[found].cnt_trend += parseInt(cnt_add); 
+                        }
                     }
                     //If the request type is not accounted for, create a new object for it
                     else { 
                         var obj = {};
                         obj["text"] = type_add;
                         obj["cnt"] = parseInt(cnt_add);
+                        
+                        //If within trend window, start out the trend count. Otherwise, set to 0
+                        if ((today.getTime() - day.getTime()) / (1000 * 3600 * 24) <= trend_lookback)
+                        {
+                          obj["cnt_trend"] = parseInt(cnt_add); 
+                        }  else {
+                          obj["cnt_trend"] = 0; 
+                        }                      
                         request_types.push(obj);
                     }
 
@@ -82,35 +113,39 @@ $.getJSON(url_base + group_query, function(data) {
             }
     //Sort request type list by most frequent first:
     //var request_types = d.values.sort((a, b) => (parseInt(b.cnt) > parseInt(a.cnt)) ? 1 : -1);
-    console.dir(request_types);
+    console.log(request_types);
+
+    //Add trend percentage to request
+
+            
             
   ///Part 2: SVG, d3 work:
 
     //Create the container and svg canvas    
     var svgContainer = d3.select('#bar_chart');
 
+    var svg = svgContainer.append('svg')
+    .attr("width", 600)
+    .attr("height", 500);
+
     //Add the dropdown for specific call types
     var span = svgContainer.append('span')
-        .text('Specific Call Type: ')
+        .text('Specific Call Type: ');
     var xInput = svgContainer.append('select')
         .attr('id','callselect')
         .style('text-align-last', 'center')
-        .on('change',ChangeChartCategory)
+        .on('change', function() {ChangeChartCategory(this.value);})
         .selectAll('option')
         .data(request_types)
         .enter()
         .append('option')
         .attr('value', function (d) { return d.text })
-        .text(function (d) { return d.text + ':  ('+ d.cnt +') requests in 2020' ;})
+        .text(function (d) { return d.text + ':  ('+ d.cnt +') requests in 2020' ;});
     svgContainer.append('br')
-
-    var svg = svgContainer.append('svg')
-      .attr("width", 800)
-      .attr("height", 500);
     
     // Set the dimensions of the canvas / graph
     var svg = d3.select("svg"),
-        margin = {top: 100, right: 30, bottom: 40, left: 50},
+        margin = {top: 40, right: 30, bottom: 40, left: 50},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom,
         g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -146,8 +181,8 @@ $.getJSON(url_base + group_query, function(data) {
 
         //Show and format tooltip
           tooltip.html(html)
-              .style("left", (d3.event.pageX + 15) + "px")
-              .style("top", (d3.event.pageY - 28) + "px")
+              .style("left", (d3.event.pageX + 5) + "px")
+              .style("top", (d3.event.pageY - 350) + "px")
             .transition()
               .duration(200) // ms
               .style("opacity", .9) // started as 0!
@@ -231,17 +266,19 @@ $.getJSON(url_base + group_query, function(data) {
     //Initialize the page with the "overall" bar chart:
     plot_bars(nested);
 
-        function ChangeChartCategory() {
-            var value = this.value // grab user selection
+        function ChangeChartCategory(val) {
+            var value = val;// grab user selection
             var single_type_object = [];
 
             if (value == 'All Requests'){
               set_scale(nested);
               plot_bars(nested);
+              $('#bar_title').text("311 Request Volume");
             }
 
             else {
-            //Build dataset specific to this type
+              $('#bar_title').text("Trend: " + value);
+              //Build dataset specific to this type
             for(i=0; i<nested.length; i++){
                 var obj = {};
                 obj['key'] = nested[i].key;
@@ -265,40 +302,98 @@ $.getJSON(url_base + group_query, function(data) {
 
         }
 
-              //Sub-function to create dataset
-              //Re-render chart
-
-        function xChange() {
-          var value = this.value // get the new x value
-          xScale // change the xScale
-          .domain([
-              d3.min([d3.min(data,function (d) { return d[value] })]),
-              d3.max([d3.max(data,function (d) { return d[value] })])
-              ])
-          xAxis.scale(xScale) // change the xScale
-          d3.select('#xAxis') // redraw the xAxis
-          .transition().duration(1000)
-          .call(xAxis)
-          d3.select('#xAxisLabel') // change the xAxisLabel
-          .transition().duration(1000)
-          .text(value)
-          d3.selectAll('circle') // move the circles
-          .transition().duration(1000)
-          .delay(function (d,i) { return i*10})
-              .attr('cx',function (d) { return xScale(d[value]) })
-      }
   
 
+//                                                         //
+// JS code producing the "Trends" section of the dashboard //
+//                                                         //
 
-        
+// 1) Calculate % changes in request volume for each sub-type over the past 30 days
+// 2) Generate alert panel at top of dashboard
+// 3) Generate specific item buttons for top trending sub-types
+
+
+// 1) % changes in request volume over the past 30 days
+
+up_trend_types = [];
+down_trend_types = [];
+var today = new Date();
+var start = new Date('2020-01-01');
+
+for(i=0; i<request_types.length; i++)
+{
+    if ((request_types[i].cnt_trend / 30) /
+        (request_types[i].cnt / ((today.getTime() - start.getTime()) / (1000 * 3600 * 24))) < 1) 
+    {
+        request_types[i].trend_perc = parseInt(100* (1- (request_types[i].cnt_trend / 30) /
+        (request_types[i].cnt / ((today.getTime() - start.getTime()) / (1000 * 3600 * 24)))));  
+        request_types[i].trend = "down";
+        //Add to down-trend list
+        down_trend_types.push(request_types[i]);
+
+    } else {
+        request_types[i].trend_perc = parseInt(100* ((request_types[i].cnt_trend / 30) /
+        (request_types[i].cnt / ((today.getTime() - start.getTime()) / (1000 * 3600 * 24)))-1));  
+        request_types[i].trend = "up";
+        //Add to up-trend list
+        up_trend_types.push(request_types[i]);
+    }
+}
+
+//Sort each trend category in descending order
+var up_trend_types = up_trend_types.sort((a, b) => (parseInt(b.trend_perc) > parseInt(a.trend_perc)) ? 1 : -1);
+var down_trend_types = down_trend_types.sort((a, b) => (parseInt(b.trend_perc) > parseInt(a.trend_perc)) ? 1 : -1);
+
+//Filter out low-count request types
+var up_trend_types = up_trend_types.filter(function (el) {
+  return el.cnt >= 75 &&
+         el.text != "All Requests";
 });
-  
-    //$('#bar_chart').append(content);
-                
+var down_trend_types = down_trend_types.filter(function (el) {
+  return el.cnt >= 75 &&
+         el.text != "All Requests" &&
+         el.text != "Unshoveled Sidewalk" &&
+         el.text != "Request for Snow Plowing" &&
+         el.text != "Misc. Snow Complaint";
+});
+
+// 2) Generate alert panel at top of dashboard
+
+var overall_trend_text = request_types[0].trend == "down" ? "311 requests are down " : "311 requests are up "
+
+var trend_message_content = '<div class="alert alert-dark" role="alert"><b>'+
+                              overall_trend_text + request_types[0].trend_perc + '%</b> ' +
+                              'in the last 30 days (relative to the 2020 average)'
+                            + '</div>';
+
+$('#trend_message').append(trend_message_content);
+
+// 3) Generate specific item buttons for top trending sub-types
+var up_content = "";
+//Up-trending buttons
+for(i=0; i<9; i++){
+  up_content += '<button type="button" id = "up_button" class="btn btn-primary btn" value=\"'+
+              up_trend_types[i].text+'\" onclick="ChangeChartCategory(this.value);">' +
+              up_trend_types[i].text + ' (+' + up_trend_types[i].trend_perc + '%)'
+          + '</button>';
+}
+
+console.log(up_content);
+
+$('#trend_up_buttons').append(up_content);
+
+//Down-trending buttons
+var down_content = "";
+
+for(i=0; i<6; i++){
+  down_content += '<button type="button" id = "down_button" class="btn btn-primary btn" value=\"'+
+              down_trend_types[i].text+'\" onclick="ChangeChartCategory(this.value);">' +
+              down_trend_types[i].text + ' (+' + down_trend_types[i].trend_perc + '%)'
+          + '</button>';
+}
+
+console.log(down_content);
+
+$('#trend_down_buttons').append(down_content);
 
 
- //Create recent records table
-
- 
- //console.log(response.responseJSON.result);
- //var dat = JSON.parse(response.responseJSON.result.records);

@@ -10,6 +10,21 @@
     font: 12px helvetica; 
 }
 
+#up_button {
+    background: lightcoral;
+    border-color: maroon; 
+}
+
+#up_button {
+    background: lightcoral;
+    border-color: maroon; 
+}
+
+#down_button {
+    background: rgb(46, 145, 207);
+    border-color: darkblue; 
+}
+
 .tooltip {	
     position: absolute;			
     text-align: left;			

@@ -9,30 +9,56 @@
         <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
   
         <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+
+        <link rel= "stylesheet" type= "text/css" href = "bos311styling.css">
+
 
         <script type="text/javascript" src="itemList.js"></script>
-        <script type="text/javascript" src="barChart.js"></script>
-        <script type="text/javascript" src="bosMap.js"></script>
-        <link rel= "stylesheet" type= "text/css" href = "bos311styling.css">
+        <!-- <script type="text/javascript" src="trendBoard.js"></script> -->
+        <!-- <script type="text/javascript" src="bosMap.js"></script> -->
 
     </head>
 
     <body>
         <div class="container">
+            <h1>Boston 311 Dashboard</h1> 
             <div class="row">
-                <div class="col-lg">
-                <h1>Boston 311 Dashboard</h1> 
-                <span id="explainer_text">All data sourced from the City of Boston's open data hub, <a href="https://data.boston.gov">Analyze Boston</a>. </span>
+                <div id="explainer_text" class="col-2">
+                    <ul>Charting</ul>
+                    <ul>Map</ul>
+                    <ul>Request Log</ul>
+                </div>
+                <div class="col-10">
+                    <span>This dashboard provides an overview and trend data for citizen 311 requests. Boston residents submit 311 requests to the city via phone calls and the city's Citizens Connect app.</span>
+                    <span id="explainer_text"><br>All data used in this dashboard is sourced from the City of Boston's open data initiative, <a href="https://data.boston.gov">Analyze Boston</a>. </span>
                 </div>
             </div>
         </div>
 
-        <div id = "bar_chart" class="container">
-            <h2>Request Volume</h2> 
+        <div class="container">
+            <h2>Trends (Last 30 Days)</h2>
+            <div id="trend_message" class="col-8"></div>
+            <div class="row">
+                <div id="trend_up_buttons" class="col-6">
+                    <h5>More of these Requests:</h5>
+                </div>
+                <div id="trend_down_buttons"class="col-6">
+                    <h5>Less of these Requests:</h5>
+                    
+                </div>
+            </div>
         </div>
 
-        <div id = "boston_map" class="container">
-            <h2>Map Placeholder</h2> 
+        <div class="container">
+            <div class="row">
+                <div id = "bar_chart" class="col-6">
+                    <h2 id="bar_title">Request Volume</h2> 
+                </div>
+                <div id = "boston_map" class="col-6">
+                    <h2>Map</h2> 
+                </div>
+            </div>
         </div>
 
         <div id = "recent_records_table" class="container">
@@ -42,4 +68,4 @@
     </body>
 
 
-    
+    <script type="text/javascript" src="barChart.js"></script>
