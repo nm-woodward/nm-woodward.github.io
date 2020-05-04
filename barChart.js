@@ -388,7 +388,7 @@ var down_content = "";
 for(i=0; i<6; i++){
   down_content += '<button type="button" id = "down_button" class="btn btn-primary btn" value=\"'+
               down_trend_types[i].text+'\" onclick="ChangeChartCategory(this.value);">' +
-              down_trend_types[i].text + ' (+' + down_trend_types[i].trend_perc + '%)'
+              down_trend_types[i].text + ' (-' + down_trend_types[i].trend_perc + '%)'
           + '</button>';
 }
 
