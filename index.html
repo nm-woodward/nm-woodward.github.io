@@ -12,11 +12,16 @@
         <script src="https://d3js.org/d3-geo.v1.min.js"></script>
 
         <link rel= "stylesheet" type= "text/css" href = "bos311styling.css">
-
-
-        <script type="text/javascript" src="itemList.js"></script>
         <!-- <script type="text/javascript" src="trendBoard.js"></script> -->
-        <!-- <script type="text/javascript" src="bosMap.js"></script> -->
+
+         <!-- Mapping with Leaflet-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+        <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js"></script>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
 
     </head>
 
@@ -24,10 +29,13 @@
         <div class="container">
             <h1>Boston 311 Dashboard</h1> 
             <div class="row">
-                <div id="explainer_text" class="col-2">
-                    <ul>Charting</ul>
-                    <ul>Map Placeholder</ul>
-                    <ul>Request Log</ul>
+                <div class="col-2">
+                    <Span>Contains:</Span>
+                    <ul id="explainer_text">
+                        <li>Charting</li>
+                        <li>Map</li>
+                        <li>Request Log</li>
+                    </ul>
                 </div>
                 <div class="col-10">
                     <span>This dashboard provides an overview and trend data for citizen 311 requests. Boston residents submit 311 requests to the city via phone calls and the city's Citizens Connect app.</span>
@@ -52,11 +60,12 @@
 
         <div class="container">
             <div class="row">
-                <div id = "bar_chart" class="col-6">
+                <div id = "bar_chart" class="col">
                     <h2 id="bar_title">Request Volume</h2> 
                 </div>
-                <div id = "boston_map" class="col-6">
+                <div class="col"> 
                     <h2>Map</h2> 
+                    <div id = "boston_map"></div>
                 </div>
             </div>
         </div>
@@ -67,5 +76,6 @@
         
     </body>
 
-
+    <script type="text/javascript" src="itemList.js"></script>
     <script type="text/javascript" src="barChart.js"></script>
+    <script type="text/javascript" src="map311.js"></script>

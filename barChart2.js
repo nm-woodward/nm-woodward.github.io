@@ -130,17 +130,17 @@ var df = [];
 
     //Add the dropdown for specific call types
     var span = svgContainer.append('span')
-        .text('Specific Call Type: ');
+        .text('Specific Call Type: ')
     var xInput = svgContainer.append('select')
         .attr('id','callselect')
         .style('text-align-last', 'center')
-        .on('change', function() {ChangeChartCategory(this.value);})
+        .on('change',ChangeChartCategory)
         .selectAll('option')
         .data(request_types)
         .enter()
         .append('option')
         .attr('value', function (d) { return d.text })
-        .text(function (d) { return d.text + ':  ('+ d.cnt +') requests in 2020' ;});
+        .text(function (d) { return d.text + ':  ('+ d.cnt +') requests in 2020' ;})
     svgContainer.append('br')
     
     // Set the dimensions of the canvas / graph
@@ -173,8 +173,7 @@ var df = [];
               day_type_string += sorted[i].type +": "+ sorted[i].cnt + "<br>";
             }
           }
-         
-
+        
         //Create tooltip text
         var html  = "<span style='font-size:20px'>" + d.key + ": " + d.total  
                     + " requests </span> </br></br> <span style='font-size:16px'>Top Requests:</span></br>" 
@@ -182,8 +181,8 @@ var df = [];
 
         //Show and format tooltip
           tooltip.html(html)
-              .style("left", d3.select(this).attr("x") - 50 + "px")     
-              .style("top", (d3.select(this).attr("y")+300) + "px")
+              .style("left", (d3.event.pageX + 5) + "px")
+              .style("top", (d3.event.pageY - 350) + "px")
             .transition()
               .duration(200) // ms
               .style("opacity", .9) // started as 0!
@@ -267,19 +266,17 @@ var df = [];
     //Initialize the page with the "overall" bar chart:
     plot_bars(nested);
 
-        function ChangeChartCategory(val) {
-            var value = val;// grab user selection
+        function ChangeChartCategory() {
+            var value = this.value // grab user selection
             var single_type_object = [];
 
             if (value == 'All Requests'){
               set_scale(nested);
               plot_bars(nested);
-              $('#bar_title').text("311 Request Volume");
             }
 
             else {
-              $('#bar_title').text("Trend: " + value);
-              //Build dataset specific to this type
+            //Build dataset specific to this type
             for(i=0; i<nested.length; i++){
                 var obj = {};
                 obj['key'] = nested[i].key;
@@ -302,6 +299,8 @@ var df = [];
           }
 
         }
+
+  
 
 //                                                         //
 // JS code producing the "Trends" section of the dashboard //
@@ -339,11 +338,9 @@ for(i=0; i<request_types.length; i++)
     }
 }
 
-var bt = 'pk.eyJ1Ijoibm0td29vZHdhcmQiLCJhIjoiY2s5dnZoaWJ';
-
 //Sort each trend category in descending order
 var up_trend_types = up_trend_types.sort((a, b) => (parseInt(b.trend_perc) > parseInt(a.trend_perc)) ? 1 : -1);
-var down_trend_types = down_trend_types.sort((a, b) => (parseInt(b.trend_perc) > parseInt(a.trend_perc)) ? 1 : -1);
+var down_trend_types = up_trend_types.sort((a, b) => (parseInt(b.trend_perc) > parseInt(a.trend_perc)) ? 1 : -1);
 
 //Filter out low-count request types
 var up_trend_types = up_trend_types.filter(function (el) {
@@ -354,16 +351,15 @@ var down_trend_types = down_trend_types.filter(function (el) {
   return el.cnt >= 75 &&
          el.text != "All Requests" &&
          el.text != "Unshoveled Sidewalk" &&
-         el.text != "Request for Snow Plowing" &&
-         el.text != "Misc. Snow Complaint";
+         el.text != "Request for Snow Plowing";
 });
 
 // 2) Generate alert panel at top of dashboard
 
 var overall_trend_text = request_types[0].trend == "down" ? "311 requests are down " : "311 requests are up "
 
-var trend_message_content = '<div class="alert alert-dark" role="alert"><b>'+
-                              overall_trend_text + request_types[0].trend_perc + '%</b> ' +
+var trend_message_content = '<div class="alert alert-dark" role="alert">'+
+                              overall_trend_text + request_types[0].trend_perc + '% ' +
                               'in the last 30 days (relative to the 2020 average)'
                             + '</div>';
 
@@ -371,30 +367,15 @@ $('#trend_message').append(trend_message_content);
 
 // 3) Generate specific item buttons for top trending sub-types
 var up_content = "";
-//Up-trending buttons
+
 for(i=0; i<9; i++){
-  up_content += '<button type="button" id = "up_button" class="btn btn-primary btn" value=\"'+
-              up_trend_types[i].text+'\" onclick="ChangeChartCategory(this.value);">' +
+  up_content += '<button type="button" id = "up_button" class="btn btn-primary btn" value='+
+              up_trend_types[i].text+' onclick="ChangeChartCategory();">' +
               up_trend_types[i].text + ' (+' + up_trend_types[i].trend_perc + '%)'
           + '</button>';
 }
 
-console.log(up_content);
-
 $('#trend_up_buttons').append(up_content);
 
-//Down-trending buttons
-var down_content = "";
-
-for(i=0; i<6; i++){
-  down_content += '<button type="button" id = "down_button" class="btn btn-primary btn" value=\"'+
-              down_trend_types[i].text+'\" onclick="ChangeChartCategory(this.value);">' +
-              down_trend_types[i].text + ' (-' + down_trend_types[i].trend_perc + '%)'
-          + '</button>';
-}
-
-console.log(down_content);
-
-$('#trend_down_buttons').append(down_content);
 
 
