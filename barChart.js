@@ -299,6 +299,8 @@ var df = [];
             set_scale(single_type_object);
             //Re-plot the bars:
             plot_bars(single_type_object);
+            //Change Map Markers:
+            ChangeMapMarkers(val); 
           }
 
         }

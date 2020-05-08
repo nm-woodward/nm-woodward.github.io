@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="col-2">
                     <Span>Contains:</Span>
-                    <ul id="explainer_text">
+                    <ul class="explainer_text">
                         <li>Charting</li>
                         <li>Mapping</li>
                         <li>Request Log</li>
@@ -50,8 +50,8 @@
                 </div>
                 <div class="col-10">
                     <span>This dashboard provides an overview and trend data for citizen 311 requests. Boston residents submit 311 requests to the city via phone calls and the city's Citizens Connect app.</span>
-                    <span id="explainer_text"><br>All data used in this dashboard is sourced from the City of Boston's open data initiative, <a href="https://data.boston.gov">Analyze Boston</a>. </span>
-                    <span id="explainer_text"><br>Disclaimer: this dashboard is a work in progress, with new functionality added periodically. </span>
+                    <span class="explainer_text"><br>All data used in this dashboard is sourced from the City of Boston's open data initiative, <a href="https://data.boston.gov">Analyze Boston</a>. </span>
+                    <span class="explainer_text"><br>Disclaimer: this dashboard is a work in progress, with new functionality added periodically. </span>
                 </div>
             </div>
         </div>
@@ -65,19 +65,21 @@
                 </div>
                 <div id="trend_down_buttons"class="col-6">
                     <h5>Less of these Requests:</h5>
-                    
                 </div>
             </div>
         </div>
-
+        
+        <br>
+        
         <div class="container">
             <div class="row">
                 <div id = "bar_chart" class="col">
-                    <h2 id="bar_title">Request Volume in 2020</h2> 
+                    <h3 id="bar_title">Request Volume in 2020</h3> 
                 </div>
                 <div class="col"> 
-                    <h2>Recent Request Map</h2> 
+                    <h3 id="map_title">Recent Request Map</h3> 
                     <div id = "boston_map"></div>
+                    <span id="map_explainer">Markers indicate locations of the most recent 500 requests.</span> 
                 </div>
             </div>
         </div>
