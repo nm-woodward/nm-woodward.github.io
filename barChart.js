@@ -374,7 +374,7 @@ $('#trend_message').append(trend_message_content);
 // 3) Generate specific item buttons for top trending sub-types
 var up_content = "";
 //Up-trending buttons
-for(i=0; i<9; i++){
+for(i=0; i<15; i++){
   up_content += '<button type="button" id = "up_button" class="btn btn-primary btn" value=\"'+
               up_trend_types[i].text+'\" onclick="ChangeChartCategory(this.value);">' +
               up_trend_types[i].text + ' (+' + up_trend_types[i].trend_perc + '%)'
