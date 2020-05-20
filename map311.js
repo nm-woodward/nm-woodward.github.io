@@ -1,5 +1,5 @@
 
-mapboxgl.accessToken = bt+'v'+aj;
+mapboxgl.accessToken = bt+'t'+aj;
 currentMarkers = [];
     //mapboxgl.accessToken = at1+at2;
 

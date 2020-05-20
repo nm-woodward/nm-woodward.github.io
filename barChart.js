@@ -341,7 +341,7 @@ for(i=0; i<request_types.length; i++)
     }
 }
 
-var bt = 'pk.eyJ1Ijoibm0td29vZHdhcmQiLCJhIjoiY2s5dnZoaWJ';
+var bt = 'pk.eyJ1Ijoibm0td29vZHdhcmQiLCJhIjoiY2s5dnc5aGd3MDN';
 
 //Sort each trend category in descending order
 var up_trend_types = up_trend_types.sort((a, b) => (parseInt(b.trend_perc) > parseInt(a.trend_perc)) ? 1 : -1);
@@ -374,7 +374,7 @@ $('#trend_message').append(trend_message_content);
 // 3) Generate specific item buttons for top trending sub-types
 var up_content = "";
 //Up-trending buttons
-for(i=0; i<15; i++){
+for(i=0; i<9; i++){
   up_content += '<button type="button" id = "up_button" class="btn btn-primary btn" value=\"'+
               up_trend_types[i].text+'\" onclick="ChangeChartCategory(this.value);">' +
               up_trend_types[i].text + ' (+' + up_trend_types[i].trend_perc + '%)'
