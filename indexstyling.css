@@ -1,0 +1,166 @@
+
+body {
+  font-family: HelveticaNeue-Light;	
+  background-color: #e9f0f7;
+}
+#title {	
+			
+    font: 50px HelveticaNeue-Light;		
+    color: black;
+    opacity: 0.6;
+    font-weight: bold;
+		
+  }
+
+  #title:hover {	
+			
+    font: 50px HelveticaNeue-Light;		
+    color: black;
+    opacity: 0.8;
+    font-weight: bold;
+		
+  }
+
+.feature {	
+    text-align: left;  
+    background-color: #fafafa;
+    border-color: #fafafa;
+    color: black;
+    width: 500px;
+    height: 250px;
+    white-space: normal;
+    position: relative;
+    overflow: hidden;
+    }
+
+.baseball-article {	
+      text-align: left;  
+      background-color: #fafafa;
+      border-color: #fafafa;
+      color: black;
+      width: 500px;
+      height: 150px;
+      white-space: normal;
+      position: relative;
+      overflow: hidden;
+      }
+
+
+  /* Background image opacity */
+#project-tile-311:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.3;
+  background-image: url('pdf/BOS-screenshot.png');
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+
+  /* Background image opacity */
+  #project-tile-GA:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 108px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.3;
+    background-image: url('pdf/GA-screenshot.png');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+  }
+
+    /* Background image opacity */
+    #project-tile-THT1:before {
+      content: ' ';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 90px;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0.3;
+      background-image: url('pdf/THT1-screenshot.png');
+      background-repeat: no-repeat;
+      background-position: 50% 0;
+      -ms-background-size: cover;
+      -o-background-size: cover;
+      -moz-background-size: cover;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+
+    /* Background image opacity */
+    #project-tile-THT2:before {
+      content: ' ';
+      display: block;
+      position: absolute;
+      left: 150px;
+      top: 80px;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0.3;
+      background-image: url('pdf/THT2-screenshot.png');
+      background-repeat: no-repeat;
+      background-position: 50% 0;
+      -ms-background-size: cover;
+      -o-background-size: cover;
+      -moz-background-size: cover;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+
+    /* Background image opacity */
+    #project-tile-THT3:before {
+      content: ' ';
+      display: block;
+      position: absolute;
+      left: 200px;
+      top: 55px;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0.3;
+      background-image: url('pdf/THT3-screenshot.png');
+      background-repeat: no-repeat;
+      background-position: 50% 0;
+      -ms-background-size: cover;
+      -o-background-size: cover;
+      -moz-background-size: cover;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+.project-type {	
+  font: 14px HelveticaNeue-Light;	
+  font-weight: bold;
+  }
+
+.project-explainer {	
+    font: 12px HelveticaNeue-Light;	
+  }
+
+  .padding-0{
+    padding-right:0;
+    padding-left:0;
+}
+

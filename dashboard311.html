@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>City of Boston: 311 Viz</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+
+        <link rel= "stylesheet" type= "text/css" href = "bos311styling.css">
+        <!-- <script type="text/javascript" src="trendBoard.js"></script> -->
+
+         <!-- Mapping with Leaflet-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+        <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js"></script>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165889173-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-165889173-1');
+        </script>
+
+    
+    </head>
+
+    <body>
+        <!-- Test multiple-page setup   <a href="page1.html">Page 2</a> -->
+        <!-- <a href="pdf/NOAH WOODWARD Resume.pdf">Page 2</a> -->
+        <div class="container" id="back-to-home"> 
+            <a id="back-to-home" href="index.html">NOAH WOODWARD</a>
+        </div>
+        <div></br></div>
+        <div class="container">
+            <h1>Boston 311 Dashboard</h1> 
+            <div class="row">
+                <div class="col-2">
+                    <Span>Contains:</Span>
+                    <ul class="explainer_text">
+                        <li>Charting</li>
+                        <li>Mapping</li>
+                        <li>Request Log</li>
+                    </ul>
+                </div>
+                <div class="col-10">
+                    <span>This dashboard provides an overview and trend data for citizen 311 requests. Boston residents submit 311 requests to the city via phone calls and the city's Citizens Connect app.</span>
+                    <span class="explainer_text"><br>All data used in this dashboard is sourced from the City of Boston's open data initiative, <a href="https://data.boston.gov">Analyze Boston</a>. </span>
+                    <span class="explainer_text"><br>Disclaimer: this dashboard is a work in progress, with new functionality added periodically. </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Trends (Last 30 Days)</h2>
+            <div id="trend_message" class="col-8"></div>
+            <div class="row">
+                <div id="trend_up_buttons" class="col-6">
+                    <h5>More of these Requests:</h5>
+                </div>
+                <div id="trend_down_buttons"class="col-6">
+                    <h5>Less of these Requests:</h5>
+                </div>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="container">
+            <div class="row">
+                <div id = "bar_chart" class="col">
+                    <h3 id="bar_title">Request Volume in 2020</h3> 
+                </div>
+                <div class="col"> 
+                    <h3 id="map_title">Recent Request Map</h3> 
+                    <div id = "boston_map"></div>
+                    <span id="map_explainer">Markers indicate locations of the most recent 500 requests.</span> 
+                </div>
+            </div>
+        </div>
+
+        <div id = "recent_records_table" class="container">
+            <h2>Recent Calls:</h2> 
+        </div>
+        
+    </body>
+
+    <script type="text/javascript" src="itemList.js"></script>
+    <script type="text/javascript" src="barChart.js"></script>
+    <script type="text/javascript" src="map311.js"></script>
