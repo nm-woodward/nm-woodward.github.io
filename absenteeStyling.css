@@ -1,0 +1,53 @@
+#xaxis {
+    font: 14px helvetica; 
+}
+
+#explainer_text {
+    font: 12px helvetica; 
+}
+
+#map_explainer {
+    font: 10px helvetica; 
+}
+
+#table_text {
+    font: 12px helvetica; 
+}
+
+#up_button {
+    background: lightcoral;
+    border-color: maroon; 
+}
+
+#down_button {
+    background: rgb(46, 145, 207);
+    border-color: darkblue; 
+}
+
+.tooltip {	
+    position: absolute;			
+    text-align: left;			
+    width: 350px;									
+    padding: 2px;				
+    font: 14px helvetica;		
+    background: darkblue;
+    color: white;	
+    border: 2px;		
+    border-radius: 8px;			
+    pointer-events: none;			
+  }
+
+  #boston_map { height: 400px; }
+
+  .marker {
+    background-color: darkblue;
+    opacity: .5;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+ #marker_tooltip {
+    font-size: 14px;
+}
