@@ -1,30 +1,32 @@
-#xaxis {
-    font: 14px helvetica; 
+body {
+  background-color: #f1f1f3;
 }
 
-#explainer_text {
-    font: 12px helvetica; 
+
+
+.title {				
+  text-align: center;
 }
 
-#map_explainer {
-    font: 10px helvetica; 
-}
+.d_row {				
+    font: 24px helvetica;		
+    color: darkblue;	
+    font-weight: bold;
+  }
 
-#table_text {
-    font: 12px helvetica; 
-}
+.r_row {				
+    font: 14px helvetica;		
+    color: red;	
+  }
+ 
+  #map_here {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  }
 
-#up_button {
-    background: lightcoral;
-    border-color: maroon; 
-}
-
-#down_button {
-    background: rgb(46, 145, 207);
-    border-color: darkblue; 
-}
-
-.tooltip {	
+  .tooltip {	
     position: absolute;			
     text-align: left;			
     width: 350px;									
@@ -37,7 +39,14 @@
     pointer-events: none;			
   }
 
-  #boston_map { height: 400px; }
+  #map_here { 
+    height: 500px;
+    width: 450px;
+   }
+
+   #map_title { 
+    position: absolute;
+   }
 
   .marker {
     background-color: darkblue;
@@ -48,6 +57,13 @@
     cursor: pointer;
   }
 
- #marker_tooltip {
-    font-size: 14px;
+ #marker_tooltip {		
+  text-align: left;												
+  font: 14px helvetica;		
+}
+
+#submission_rate {		
+  text-align: center;												
+  font: 64px helvetica;	
+  font-weight: bold;
 }

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GA Absentee Dashboard</title>
+        <!-- Load Bootstrap-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- Load jQuery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        
+        <!-- Load d3-->
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+
+        <!-- Load Stylesheets-->
+        <link rel= "stylesheet" type= "text/css" href = "absenteeStyling.css">
+        
+        <!-- Mapping -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet'
+    </head>
+
+    <body>
+        
+        <div class="container">
+            <h1 class="title">Georgia Absentee Ballot Dashboard</h1> 
+            <h3 class="title">August Primary Runoff</br></h3>
+            
+            <div>&nbsp;</div>
+
+            <div class="row">
+                <div class="col-6">
+                    <h2>Ballot Request Activity</h2>
+                </div>
+                <div class="col-6">
+                    <h2>App Rejections by County</h2> 
+                </div>
+            </div>
+            <div class="row">
+                
+                <div class="col-6">
+                    <!-- Metrics here -->
+                        <div id="application_table_here"></div>
+                    <h2>Application Rejections</h2>
+                        <div id="rejection_table_here"></div>
+                    <h2>Ballot Return Rate (D)</h2>
+                        <div id="ballot_submission_number"></div>
+                </div>
+                
+                <div class="col-6">
+                        <div id="map_here"></div>
+                    <!-- Map here -->
+                </div>
+            </div>
+
+        </div>
+        
+    </body>
+
+ <!-- Run JS Scripts -->
+<script type="text/javascript" src="applicationTable.js"></script>
+<script type="text/javascript" src="rejectionTable.js"></script>
+<script type="text/javascript" src="ballotSubmission.js"></script>
+<script type="text/javascript" src="absenteeMap.js"></script>
