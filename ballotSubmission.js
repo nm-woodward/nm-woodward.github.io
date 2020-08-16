@@ -17,7 +17,7 @@ d3.csv("by_week.csv").then(function(data) {
 //Calculate percentage of ballots issued that were returned (from loop above)
 var d_pct_returned = parseInt(parseInt(d_returned_sum)/(parseInt(d_app_sum) - parseInt(d_reject_sum))*100);
 var content = '<div style=\'text-align:right\'> <span id=\"submission_rate\" >'+ d_pct_returned +'% </span>     (through Aug. 10th)</div>';
-var jp = 'QiLCJhIjoiY2tkeGd3YWxzMXpjdDJ3bnVhOHptbnZlaCJ9.wZn4Da7fVXi8A9S9fIvFVQ'
+var jp = 'QiLCJhIjoiY2tkeGd3YWxzMXpjdDJ3bnVhOHptbnZlaCJ9.wZn4Da7fVXi8A9S9fIvFVQ';
 $('#ballot_submission_number').append(content);
 
 /*
