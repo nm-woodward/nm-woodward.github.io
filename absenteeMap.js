@@ -35,8 +35,9 @@ d3.csv("by_county.csv").then(function(data) {
 
     console.log(county_shapes.features[1].properties);
     console.log(county_shapes.length);
+    var jp = 'QiLCJhIjoiY2tkeGd3YWxzMXpjdDJ3bnVhOHptbnZlaCJ9.wZn4Da7fVXi8A9S9fIvFV';
 
-    mapboxgl.accessToken = 'pk.eyJ1Ijoibm0td29vZHdhcm'+jp;
+    mapboxgl.accessToken = 'pk.eyJ1Ijoibm0td29vZHdhcm'+jp+'Q';
 
     var map = new mapboxgl.Map({
         container: 'map_here', // container id
