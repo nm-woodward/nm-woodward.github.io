@@ -4,7 +4,7 @@
 //var query = "&limit=5";
 var url_base = "https://data.boston.gov/api/3/action/datastore_search_sql?sql=";
 var group_query = `SELECT CAST(open_dt as date) as open_dt, type, count(*) as cnt 
-                 FROM \"6ff6a6fd-3141-4440-a880-6f60a37fe789\" 
+                 FROM \"f53ebccd-bc61-49f9-83db-625f209c95f5\" 
                  GROUP BY CAST(open_dt as date), type 
                  ORDER BY CAST(open_dt as date)`;
 
@@ -140,7 +140,7 @@ var df = [];
         .enter()
         .append('option')
         .attr('value', function (d) { return d.text })
-        .text(function (d) { return d.text + ':  ('+ d.cnt +') requests in 2020' ;});
+        .text(function (d) { return d.text + ':  ('+ d.cnt +') requests in 2021' ;});
     svgContainer.append('br')
     
     // Set the dimensions of the canvas / graph
@@ -319,7 +319,7 @@ var df = [];
 up_trend_types = [];
 down_trend_types = [];
 var today = new Date();
-var start = new Date('2020-01-01');
+var start = new Date('2021-01-01');
 
 for(i=0; i<request_types.length; i++)
 {
@@ -366,7 +366,7 @@ var overall_trend_text = request_types[0].trend == "down" ? "311 requests are do
 
 var trend_message_content = '<div class="alert alert-dark" role="alert"><b>'+
                               overall_trend_text + request_types[0].trend_perc + '%</b> ' +
-                              'in the last 30 days (relative to the 2020 average)'
+                              'in the last 30 days (relative to the 2021 average)'
                             + '</div>';
 
 $('#trend_message').append(trend_message_content);
