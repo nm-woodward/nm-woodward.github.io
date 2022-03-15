@@ -6,12 +6,15 @@ body {
 #title {	
 			
     font: 50px HelveticaNeue-Light;		
-    color: black;
     opacity: 0.6;
     font-weight: bold;
 		
   }
 
+.titlebox {
+  background-color: #272838;
+  color: #7E7F9A
+}
 .feature {	
     text-align: left;  
     background-color: #fafafa;
