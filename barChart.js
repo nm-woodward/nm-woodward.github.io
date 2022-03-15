@@ -4,7 +4,7 @@
 //var query = "&limit=5";
 var url_base = "https://data.boston.gov/api/3/action/datastore_search_sql?sql=";
 var group_query = `SELECT CAST(open_dt as date) as open_dt, type, count(*) as cnt 
-                 FROM \"f53ebccd-bc61-49f9-83db-625f209c95f5\" 
+                 FROM \"81a7b022-f8fc-4da5-80e4-b160058ca207\" 
                  GROUP BY CAST(open_dt as date), type 
                  ORDER BY CAST(open_dt as date)`;
 

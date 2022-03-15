@@ -1,5 +1,5 @@
 var url_base = 'https://data.boston.gov/api/3/action/datastore_search_sql?sql=';
-var query = `SELECT * FROM \"f53ebccd-bc61-49f9-83db-625f209c95f5\" ORDER BY open_dt DESC LIMIT 500`;
+var query = `SELECT * FROM \"81a7b022-f8fc-4da5-80e4-b160058ca207\" ORDER BY open_dt DESC LIMIT 500`;
 
 console.log(url_base+query);
 

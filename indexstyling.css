@@ -14,8 +14,11 @@ body {
 .titlebox {
   background-color: #272838;
   color: #E9F0F7;
-  width: 500px;
+  width: 530px;
   border: 2px solid #7E7F9A;
+  margin-left: 120px;
+  padding-top: 20px;
+  padding-right: 0px;
 }
 .feature {	
     text-align: left;  
