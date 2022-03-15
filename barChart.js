@@ -140,7 +140,7 @@ var df = [];
         .enter()
         .append('option')
         .attr('value', function (d) { return d.text })
-        .text(function (d) { return d.text + ':  ('+ d.cnt +') requests in 2021' ;});
+        .text(function (d) { return d.text + ':  ('+ d.cnt +') requests in 2022' ;});
     svgContainer.append('br')
     
     // Set the dimensions of the canvas / graph
@@ -319,7 +319,7 @@ var df = [];
 up_trend_types = [];
 down_trend_types = [];
 var today = new Date();
-var start = new Date('2021-01-01');
+var start = new Date('2022-01-01');
 
 for(i=0; i<request_types.length; i++)
 {
@@ -366,7 +366,7 @@ var overall_trend_text = request_types[0].trend == "down" ? "311 requests are do
 
 var trend_message_content = '<div class="alert alert-dark" role="alert"><b>'+
                               overall_trend_text + request_types[0].trend_perc + '%</b> ' +
-                              'in the last 30 days (relative to the 2021 average)'
+                              'in the last 30 days (relative to the 2022 average)'
                             + '</div>';
 
 $('#trend_message').append(trend_message_content);
